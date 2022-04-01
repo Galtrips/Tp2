@@ -1,0 +1,64 @@
+#include "FeatherShieldPinouts.h"
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+#define NUMPIXELS 10
+Adafruit_NeoPixel pixels(NUMPIXELS, A0, NEO_GRB + NEO_KHZ800);
+#define DELAYVAL 500
+
+boolean etatLed = false;
+int etat = 0;
+void setup() {
+  pinMode(A0, OUTPUT);
+  Serial.begin(115000);
+  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+  clock_prescale_set(clock_div_1);
+#endif
+
+  pixels.begin();
+   srand(time(NULL));
+}
+
+void loop() {
+  pixels.clear();
+  pixels.show();
+  
+}
+
+
+/*
+ * 
+ * pixels.clear();
+
+  for(int i=0; i<NUMPIXELS; i++) {
+
+    pixels.setPixelColor(i, pixels.Color(rand()%256, rand()%256, rand()%256));
+    pixels.show();
+    delay(DELAYVAL);
+  }
+etat = digitalRead(A2);
+  delay(150);
+  if (etat == HIGH && etatLed == false) {
+    digitalWrite(D4, HIGH);
+    etatLed = true;
+    
+  } 
+  else if (etat == HIGH && etatLed == true) {
+   digitalWrite(D4, LOW);
+   etatLed = false;  
+  
+  */
+  
+  /*Serial.println("Led rouge allumée");
+    Serial.println("Led verte allumée");
+  digitalWrite(D4, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(A0, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                  // wait for a second
+  Serial.println("Led verte éteinte");
+    Serial.println("Led rouge éteinte");
+  digitalWrite(D4, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(A0, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);     
+  */
+  
